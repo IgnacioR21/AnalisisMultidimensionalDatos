@@ -26,26 +26,44 @@
           <SSIS:Property SSIS:Name="CreatorComputerName">DEVELOPMENT</SSIS:Property>
           <SSIS:Property SSIS:Name="Description">
           </SSIS:Property>
-          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAivHlcKICMEOMKDfsjhUCZwAAAAACAAAAAAAQZgAAAAEAACAAAAB2QQn29ITs1Qo+VWFQ2SAz7q52QSM3xO1hJoA2D0zZ3gAAAAAOgAAAAAIAACAAAAAwEk0ddTDJ4ti6weKawwAYIj8BNVl75U+g6SAW/rrhz5AAAAD+mxYr3yv7TonEUXzgvpk8f6OV3ah2mr/YPw8LHPN/X2wiLVIlS19SdHUAHcw3SPBGaRIJmR8/akcSkl0F3dX7N+0F3svLU6wptH5jxrXVfbPGVAuopd3EG0UP9QSa5WboG+vOH1JKjgHHiKzm2J5dai3SxtTc7IfzdNbt/xeUX59d7QCVj93N1junoLnPHbxAAAAAAv9QP4eac6YTpdlrorsJ+U3tDRK3ehgJ7cd2wMNkIaGQ+YDo/GwlQb7X40FOg2KyxXuy5CFx1RbHEsW2cFJvhw==</SSIS:Property>
+          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAivHlcKICMEOMKDfsjhUCZwAAAAACAAAAAAAQZgAAAAEAACAAAACZwONPYe9+rR0825AgM91r3ilvWmnND38p6St6kxFnZwAAAAAOgAAAAAIAACAAAAD09HjtCACR5VZ53ZyjXklWokLHZTgEaeGRdP5PUU4fUJAAAABGUIniGapItM2mXFj+7Dzfh37wimilm0rwpTj0XoexG4aeF1FdapXLD8tkzXvv3i4GBgeBDtnIYMsjyay1cx63m8xvTlTnkTF6mUoGWN6SbcTceym/kV+qFOvKFejZJBeS5yRt79H0fYWIUcYliOR3IWG98OOn+BlBnP5aof3iISN6CsS9Nq9umizsfgVSmNFAAAAA+4XI1KPrML0dHTDZ/OD3+bzeuSwb5ASsxAvQVQ/MPtXSffdsFCSZUOQWWxsQCka16NLNxFJsnj7wywVPl+Gw/g==</SSIS:Property>
           <SSIS:Property SSIS:Name="FormatVersion">1</SSIS:Property>
         </SSIS:Properties>
         <SSIS:Packages>
-          <SSIS:Package SSIS:Name="Package.dtsx" SSIS:EntryPoint="1" />
+          <SSIS:Package SSIS:Name="HelloWorldMB.dtsx" SSIS:EntryPoint="1" />
+          <SSIS:Package SSIS:Name="HelloWorldVariables.dtsx" SSIS:EntryPoint="1" />
         </SSIS:Packages>
         <SSIS:ConnectionManagers />
         <SSIS:DeploymentInfo>
           <SSIS:ProjectConnectionParameters />
           <SSIS:PackageInfo>
-            <SSIS:PackageMetaData SSIS:Name="Package.dtsx">
+            <SSIS:PackageMetaData SSIS:Name="HelloWorldMB.dtsx">
               <SSIS:Properties>
                 <SSIS:Property SSIS:Name="ID">{23015F99-A917-4C86-B852-091533A003C3}</SSIS:Property>
                 <SSIS:Property SSIS:Name="Name">Package</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionBuild">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">3</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{FE1EF746-34C6-4B7F-8A09-68964F82AF70}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{7C70D949-3855-4A6E-AF21-793D5CED527D}</SSIS:Property>
+                <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
+                <SSIS:Property SSIS:Name="Description">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="ProtectionLevel">1</SSIS:Property>
+              </SSIS:Properties>
+              <SSIS:Parameters />
+            </SSIS:PackageMetaData>
+            <SSIS:PackageMetaData SSIS:Name="HelloWorldVariables.dtsx">
+              <SSIS:Properties>
+                <SSIS:Property SSIS:Name="ID">{24983309-E328-4B85-A51E-E9ECFBC6DBF0}</SSIS:Property>
+                <SSIS:Property SSIS:Name="Name">HelloWorldVariables</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">5</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionComments">
+                </SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{3B2F6609-1BCA-4F2F-BECE-865E162E23A2}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
@@ -76,7 +94,13 @@
         <LinkedAzureSSISIR />
         <LinkedAzureStorage />
         <RemoteExecutionFolder />
-        <ParameterConfigurationValues />
+        <ParameterConfigurationValues>
+          <ConfigurationSetting>
+            <Id>LastModifiedTime</Id>
+            <Name>LastModifiedTime</Name>
+            <Value xsi:type="xsd:dateTime">2021-04-10T00:59:23.7771565Z</Value>
+          </ConfigurationSetting>
+        </ParameterConfigurationValues>
       </Options>
     </Configuration>
   </Configurations>
