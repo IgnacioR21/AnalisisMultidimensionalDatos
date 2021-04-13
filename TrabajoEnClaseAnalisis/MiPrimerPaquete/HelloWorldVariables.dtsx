@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="HelloWorldVariables"
   DTS:PackageType="5"
-  DTS:VersionBuild="12"
-  DTS:VersionGUID="{85C2CDE8-62FA-49F2-A8CB-BDA1E1974973}">
+  DTS:VersionBuild="13"
+  DTS:VersionGUID="{3EB56777-880B-4E16-B1B8-AB7C9BC2432F}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
