@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="MiDataFlow"
   DTS:PackageType="5"
-  DTS:VersionBuild="15"
-  DTS:VersionGUID="{B89D336E-BDF9-437C-9E19-76452E6E0ED8}">
+  DTS:VersionBuild="19"
+  DTS:VersionGUID="{8C9C36FB-6388-40C5-B3C2-88D6D8F78065}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -24,6 +24,16 @@
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:ConnectionString="Data Source=(local);Initial Catalog=NORTHWND;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[(local).PruebasETL]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{6EF3D13B-3199-4368-8AFA-667C40D0FE20}"
+      DTS:ObjectName="(local).PruebasETL">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=(local);Initial Catalog=PruebasETL;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -737,19 +747,238 @@
               </outputs>
             </component>
             <component
-              refId="Package\Cargar la tabla de productos\Union All 1"
+              refId="Package\Cargar la tabla de productos\SQL Server Destination"
+              componentClassID="Microsoft.SQLServerDestination"
+              contactInfo="SQL Server Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;5"
+              description="SQL Server Destination"
+              name="SQL Server Destination"
+              version="5">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.String"
+                  description="The name of the database object to copy data into."
+                  expressionType="Notify"
+                  name="BulkInsertTableName">[MiTablaDeProductos]</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies that any constraints on the destination object are checked during the data copy operation. Corresponds to the bulk insert CHECK_CONSTRAINTS option."
+                  name="BulkInsertCheckConstraints">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the number of the first row to copy. Corresponds to the bulk insert FIRSTROW option."
+                  expressionType="Notify"
+                  name="BulkInsertFirstRow">-1</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies that any insert triggers defined on the destination object will execute during the data copy. Corresponds to the bulk insert FIRE_TRIGGERS option."
+                  name="BulkInsertFireTriggers">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Corresponds to the bulk insert KEEPIDENTITY option."
+                  name="BulkInsertKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null copied to the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="BulkInsertKeepNulls">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the number of the last row to copy. Corresponds to the bulk insert LASTROW option."
+                  expressionType="Notify"
+                  name="BulkInsertLastRow">-1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the maximum number of syntax errors and compilation errors that can occur before the data copy operation is canceled. Each row that cannot be copied is ignored and counted as one error. Corresponds to the bulk insert MAXERRORS option."
+                  name="BulkInsertMaxErrors">-1</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies how the data to be copied is sorted. Corresponds to the bulk insert ORDER option."
+                  expressionType="Notify"
+                  name="BulkInsertOrder"></property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies that a table-level lock is acquired for the duration of the data copy operation. Corresponds to the bulk insert TABLOCK option."
+                  name="BulkInsertTablock">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies in seconds the amount of time the SQL Destination adapter will wait before terminating if there is no data available for insertion.  A timeout value of 0 means the SQL Destination adapter will not time out."
+                  expressionType="Notify"
+                  name="Timeout">30</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion."
+                  name="MaxInsertCommitSize">0</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Cargar la tabla de productos\SQL Server Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[(local).PruebasETL]"
+                  connectionManagerRefId="Package.ConnectionManagers[(local).PruebasETL]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Cargar la tabla de productos\SQL Server Destination.Inputs[SQL Server Destination Input]"
+                  hasSideEffects="true"
+                  name="SQL Server Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Cargar la tabla de productos\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[ProductID]"
+                      cachedDataType="i4"
+                      cachedName="ProductID"
+                      externalMetadataColumnId="Package\Cargar la tabla de productos\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[ProductID]"
+                      lineageId="Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[ProductID]" />
+                    <inputColumn
+                      refId="Package\Cargar la tabla de productos\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[ProductNameOriginal]"
+                      cachedDataType="wstr"
+                      cachedLength="40"
+                      cachedName="ProductNameOriginal"
+                      externalMetadataColumnId="Package\Cargar la tabla de productos\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[ProductNameOriginal]"
+                      lineageId="Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[ProductNameOriginal]" />
+                    <inputColumn
+                      refId="Package\Cargar la tabla de productos\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[SupplierID]"
+                      cachedDataType="i4"
+                      cachedName="SupplierID"
+                      externalMetadataColumnId="Package\Cargar la tabla de productos\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[SupplierID]"
+                      lineageId="Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[SupplierID]" />
+                    <inputColumn
+                      refId="Package\Cargar la tabla de productos\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[CategoryID]"
+                      cachedDataType="i4"
+                      cachedName="CategoryID"
+                      externalMetadataColumnId="Package\Cargar la tabla de productos\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[CategoryID]"
+                      lineageId="Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[CategoryID]" />
+                    <inputColumn
+                      refId="Package\Cargar la tabla de productos\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[QuantityPerUnit]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="QuantityPerUnit"
+                      externalMetadataColumnId="Package\Cargar la tabla de productos\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[QuantityPerUnit]"
+                      lineageId="Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[QuantityPerUnit]" />
+                    <inputColumn
+                      refId="Package\Cargar la tabla de productos\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[UnitPriceSinAumento]"
+                      cachedDataType="cy"
+                      cachedName="UnitPriceSinAumento"
+                      externalMetadataColumnId="Package\Cargar la tabla de productos\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[UnitPriceSinAumento]"
+                      lineageId="Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[UnitPriceSinAumento]" />
+                    <inputColumn
+                      refId="Package\Cargar la tabla de productos\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[UnitsInStock]"
+                      cachedDataType="i2"
+                      cachedName="UnitsInStock"
+                      externalMetadataColumnId="Package\Cargar la tabla de productos\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[UnitsInStock]"
+                      lineageId="Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[UnitsInStock]" />
+                    <inputColumn
+                      refId="Package\Cargar la tabla de productos\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[UnitsOnOrder]"
+                      cachedDataType="i2"
+                      cachedName="UnitsOnOrder"
+                      externalMetadataColumnId="Package\Cargar la tabla de productos\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[UnitsOnOrder]"
+                      lineageId="Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[UnitsOnOrder]" />
+                    <inputColumn
+                      refId="Package\Cargar la tabla de productos\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[ReorderLevel]"
+                      cachedDataType="i2"
+                      cachedName="ReorderLevel"
+                      externalMetadataColumnId="Package\Cargar la tabla de productos\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[ReorderLevel]"
+                      lineageId="Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[ReorderLevel]" />
+                    <inputColumn
+                      refId="Package\Cargar la tabla de productos\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[Discontinued]"
+                      cachedDataType="bool"
+                      cachedName="Discontinued"
+                      externalMetadataColumnId="Package\Cargar la tabla de productos\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[Discontinued]"
+                      lineageId="Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[Discontinued]" />
+                    <inputColumn
+                      refId="Package\Cargar la tabla de productos\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[ProductName]"
+                      cachedDataType="wstr"
+                      cachedLength="40"
+                      cachedName="ProductName"
+                      externalMetadataColumnId="Package\Cargar la tabla de productos\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[ProductName]"
+                      lineageId="Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[ProductName]" />
+                    <inputColumn
+                      refId="Package\Cargar la tabla de productos\SQL Server Destination.Inputs[SQL Server Destination Input].Columns[EstadoProducto]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="EstadoProducto"
+                      externalMetadataColumnId="Package\Cargar la tabla de productos\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[EstadoProducto]"
+                      lineageId="Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[EstadoProducto]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Cargar la tabla de productos\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[ProductID]"
+                      dataType="i4"
+                      name="ProductID" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar la tabla de productos\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[ProductNameOriginal]"
+                      dataType="wstr"
+                      length="40"
+                      name="ProductNameOriginal" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar la tabla de productos\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[SupplierID]"
+                      dataType="i4"
+                      name="SupplierID" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar la tabla de productos\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[CategoryID]"
+                      dataType="i4"
+                      name="CategoryID" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar la tabla de productos\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[QuantityPerUnit]"
+                      dataType="wstr"
+                      length="20"
+                      name="QuantityPerUnit" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar la tabla de productos\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[UnitPriceSinAumento]"
+                      dataType="cy"
+                      name="UnitPriceSinAumento" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar la tabla de productos\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[UnitsInStock]"
+                      dataType="i2"
+                      name="UnitsInStock" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar la tabla de productos\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[UnitsOnOrder]"
+                      dataType="i2"
+                      name="UnitsOnOrder" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar la tabla de productos\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[ReorderLevel]"
+                      dataType="i2"
+                      name="ReorderLevel" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar la tabla de productos\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[Discontinued]"
+                      dataType="bool"
+                      name="Discontinued" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar la tabla de productos\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[ProductName]"
+                      dataType="wstr"
+                      length="40"
+                      name="ProductName" />
+                    <externalMetadataColumn
+                      refId="Package\Cargar la tabla de productos\SQL Server Destination.Inputs[SQL Server Destination Input].ExternalColumns[EstadoProducto]"
+                      dataType="wstr"
+                      length="20"
+                      name="EstadoProducto" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\Cargar la tabla de productos\Union All"
               componentClassID="Microsoft.UnionAll"
               contactInfo="Union All;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
               description="Combines rows from multiple data flows without sorting. For example, add rows back to a data flow after correction of errors. If sorting is important, we recommend using the Merge transformation."
-              name="Union All 1"
+              name="Union All"
               version="1">
               <inputs>
                 <input
-                  refId="Package\Cargar la tabla de productos\Union All 1.Inputs[Union All Input 1]"
+                  refId="Package\Cargar la tabla de productos\Union All.Inputs[Union All Input 1]"
                   name="Union All Input 1">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Cargar la tabla de productos\Union All 1.Inputs[Union All Input 1].Columns[ProductID]"
+                      refId="Package\Cargar la tabla de productos\Union All.Inputs[Union All Input 1].Columns[ProductID]"
                       cachedDataType="i4"
                       cachedName="ProductID"
                       lineageId="Package\Cargar la tabla de productos\Lectura de la tabla de Productos.Outputs[OLE DB Source Output].Columns[ProductID]">
@@ -758,11 +987,11 @@
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[ProductID]}</property>
+                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[ProductID]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Cargar la tabla de productos\Union All 1.Inputs[Union All Input 1].Columns[ProductNameOriginal]"
+                      refId="Package\Cargar la tabla de productos\Union All.Inputs[Union All Input 1].Columns[ProductNameOriginal]"
                       cachedDataType="wstr"
                       cachedLength="40"
                       cachedName="ProductNameOriginal"
@@ -772,11 +1001,11 @@
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[ProductNameOriginal]}</property>
+                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[ProductNameOriginal]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Cargar la tabla de productos\Union All 1.Inputs[Union All Input 1].Columns[SupplierID]"
+                      refId="Package\Cargar la tabla de productos\Union All.Inputs[Union All Input 1].Columns[SupplierID]"
                       cachedDataType="i4"
                       cachedName="SupplierID"
                       lineageId="Package\Cargar la tabla de productos\Lectura de la tabla de Productos.Outputs[OLE DB Source Output].Columns[SupplierID]">
@@ -785,11 +1014,11 @@
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[SupplierID]}</property>
+                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[SupplierID]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Cargar la tabla de productos\Union All 1.Inputs[Union All Input 1].Columns[CategoryID]"
+                      refId="Package\Cargar la tabla de productos\Union All.Inputs[Union All Input 1].Columns[CategoryID]"
                       cachedDataType="i4"
                       cachedName="CategoryID"
                       lineageId="Package\Cargar la tabla de productos\Lectura de la tabla de Productos.Outputs[OLE DB Source Output].Columns[CategoryID]">
@@ -798,11 +1027,11 @@
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[CategoryID]}</property>
+                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[CategoryID]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Cargar la tabla de productos\Union All 1.Inputs[Union All Input 1].Columns[QuantityPerUnit]"
+                      refId="Package\Cargar la tabla de productos\Union All.Inputs[Union All Input 1].Columns[QuantityPerUnit]"
                       cachedDataType="wstr"
                       cachedLength="20"
                       cachedName="QuantityPerUnit"
@@ -812,11 +1041,11 @@
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[QuantityPerUnit]}</property>
+                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[QuantityPerUnit]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Cargar la tabla de productos\Union All 1.Inputs[Union All Input 1].Columns[UnitPriceSinAumento]"
+                      refId="Package\Cargar la tabla de productos\Union All.Inputs[Union All Input 1].Columns[UnitPriceSinAumento]"
                       cachedDataType="cy"
                       cachedName="UnitPriceSinAumento"
                       lineageId="Package\Cargar la tabla de productos\Lectura de la tabla de Productos.Outputs[OLE DB Source Output].Columns[UnitPriceSinAumento]">
@@ -825,11 +1054,11 @@
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[UnitPriceSinAumento]}</property>
+                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[UnitPriceSinAumento]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Cargar la tabla de productos\Union All 1.Inputs[Union All Input 1].Columns[UnitsInStock]"
+                      refId="Package\Cargar la tabla de productos\Union All.Inputs[Union All Input 1].Columns[UnitsInStock]"
                       cachedDataType="i2"
                       cachedName="UnitsInStock"
                       lineageId="Package\Cargar la tabla de productos\Lectura de la tabla de Productos.Outputs[OLE DB Source Output].Columns[UnitsInStock]">
@@ -838,11 +1067,11 @@
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[UnitsInStock]}</property>
+                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[UnitsInStock]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Cargar la tabla de productos\Union All 1.Inputs[Union All Input 1].Columns[UnitsOnOrder]"
+                      refId="Package\Cargar la tabla de productos\Union All.Inputs[Union All Input 1].Columns[UnitsOnOrder]"
                       cachedDataType="i2"
                       cachedName="UnitsOnOrder"
                       lineageId="Package\Cargar la tabla de productos\Lectura de la tabla de Productos.Outputs[OLE DB Source Output].Columns[UnitsOnOrder]">
@@ -851,11 +1080,11 @@
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[UnitsOnOrder]}</property>
+                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[UnitsOnOrder]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Cargar la tabla de productos\Union All 1.Inputs[Union All Input 1].Columns[ReorderLevel]"
+                      refId="Package\Cargar la tabla de productos\Union All.Inputs[Union All Input 1].Columns[ReorderLevel]"
                       cachedDataType="i2"
                       cachedName="ReorderLevel"
                       lineageId="Package\Cargar la tabla de productos\Lectura de la tabla de Productos.Outputs[OLE DB Source Output].Columns[ReorderLevel]">
@@ -864,11 +1093,11 @@
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[ReorderLevel]}</property>
+                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[ReorderLevel]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Cargar la tabla de productos\Union All 1.Inputs[Union All Input 1].Columns[Discontinued]"
+                      refId="Package\Cargar la tabla de productos\Union All.Inputs[Union All Input 1].Columns[Discontinued]"
                       cachedDataType="bool"
                       cachedName="Discontinued"
                       lineageId="Package\Cargar la tabla de productos\Lectura de la tabla de Productos.Outputs[OLE DB Source Output].Columns[Discontinued]">
@@ -877,11 +1106,11 @@
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[Discontinued]}</property>
+                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[Discontinued]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Cargar la tabla de productos\Union All 1.Inputs[Union All Input 1].Columns[ProductName]"
+                      refId="Package\Cargar la tabla de productos\Union All.Inputs[Union All Input 1].Columns[ProductName]"
                       cachedDataType="wstr"
                       cachedLength="40"
                       cachedName="ProductName"
@@ -891,25 +1120,333 @@
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[ProductName]}</property>
+                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[ProductName]}</property>
                       </properties>
                     </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Cargar la tabla de productos\Union All.Inputs[Union All Input 4]"
+                  hasSideEffects="true"
+                  name="Union All Input 4">
+                  <inputColumns>
                     <inputColumn
-                      refId="Package\Cargar la tabla de productos\Union All 1.Inputs[Union All Input 1].Columns[EstadoProducto]"
-                      cachedDataType="wstr"
-                      cachedLength="20"
-                      cachedName="EstadoProducto"
-                      lineageId="Package\Cargar la tabla de productos\Pase el ProductName a mayúscula.Outputs[Derived Column Output].Columns[EstadoProducto]">
+                      refId="Package\Cargar la tabla de productos\Union All.Inputs[Union All Input 4].Columns[ProductID]"
+                      cachedDataType="i4"
+                      cachedName="ProductID"
+                      lineageId="Package\Cargar la tabla de productos\Lectura de la tabla de Productos.Outputs[OLE DB Source Output].Columns[ProductID]">
                       <properties>
                         <property
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[EstadoProducto]}</property>
+                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[ProductID]}</property>
                       </properties>
                     </inputColumn>
                     <inputColumn
-                      refId="Package\Cargar la tabla de productos\Union All 1.Inputs[Union All Input 1].Columns[EstadoProducto1]"
+                      refId="Package\Cargar la tabla de productos\Union All.Inputs[Union All Input 4].Columns[ProductNameOriginal]"
+                      cachedDataType="wstr"
+                      cachedLength="40"
+                      cachedName="ProductNameOriginal"
+                      lineageId="Package\Cargar la tabla de productos\Lectura de la tabla de Productos.Outputs[OLE DB Source Output].Columns[ProductNameOriginal]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[ProductNameOriginal]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Cargar la tabla de productos\Union All.Inputs[Union All Input 4].Columns[SupplierID]"
+                      cachedDataType="i4"
+                      cachedName="SupplierID"
+                      lineageId="Package\Cargar la tabla de productos\Lectura de la tabla de Productos.Outputs[OLE DB Source Output].Columns[SupplierID]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[SupplierID]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Cargar la tabla de productos\Union All.Inputs[Union All Input 4].Columns[CategoryID]"
+                      cachedDataType="i4"
+                      cachedName="CategoryID"
+                      lineageId="Package\Cargar la tabla de productos\Lectura de la tabla de Productos.Outputs[OLE DB Source Output].Columns[CategoryID]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[CategoryID]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Cargar la tabla de productos\Union All.Inputs[Union All Input 4].Columns[QuantityPerUnit]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="QuantityPerUnit"
+                      lineageId="Package\Cargar la tabla de productos\Lectura de la tabla de Productos.Outputs[OLE DB Source Output].Columns[QuantityPerUnit]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[QuantityPerUnit]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Cargar la tabla de productos\Union All.Inputs[Union All Input 4].Columns[UnitPriceSinAumento]"
+                      cachedDataType="cy"
+                      cachedName="UnitPriceSinAumento"
+                      lineageId="Package\Cargar la tabla de productos\Lectura de la tabla de Productos.Outputs[OLE DB Source Output].Columns[UnitPriceSinAumento]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[UnitPriceSinAumento]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Cargar la tabla de productos\Union All.Inputs[Union All Input 4].Columns[UnitsInStock]"
+                      cachedDataType="i2"
+                      cachedName="UnitsInStock"
+                      lineageId="Package\Cargar la tabla de productos\Lectura de la tabla de Productos.Outputs[OLE DB Source Output].Columns[UnitsInStock]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[UnitsInStock]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Cargar la tabla de productos\Union All.Inputs[Union All Input 4].Columns[UnitsOnOrder]"
+                      cachedDataType="i2"
+                      cachedName="UnitsOnOrder"
+                      lineageId="Package\Cargar la tabla de productos\Lectura de la tabla de Productos.Outputs[OLE DB Source Output].Columns[UnitsOnOrder]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[UnitsOnOrder]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Cargar la tabla de productos\Union All.Inputs[Union All Input 4].Columns[ReorderLevel]"
+                      cachedDataType="i2"
+                      cachedName="ReorderLevel"
+                      lineageId="Package\Cargar la tabla de productos\Lectura de la tabla de Productos.Outputs[OLE DB Source Output].Columns[ReorderLevel]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[ReorderLevel]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Cargar la tabla de productos\Union All.Inputs[Union All Input 4].Columns[Discontinued]"
+                      cachedDataType="bool"
+                      cachedName="Discontinued"
+                      lineageId="Package\Cargar la tabla de productos\Lectura de la tabla de Productos.Outputs[OLE DB Source Output].Columns[Discontinued]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[Discontinued]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Cargar la tabla de productos\Union All.Inputs[Union All Input 4].Columns[ProductName]"
+                      cachedDataType="wstr"
+                      cachedLength="40"
+                      cachedName="ProductName"
+                      lineageId="Package\Cargar la tabla de productos\Pase el ProductName a mayúscula.Outputs[Derived Column Output].Columns[ProductName]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[ProductName]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Cargar la tabla de productos\Union All.Inputs[Union All Input 4].Columns[EstadoProducto]"
+                      cachedDataType="wstr"
+                      cachedLength="13"
+                      cachedName="EstadoProducto"
+                      lineageId="Package\Cargar la tabla de productos\Agregar sufijo DESABASTECIDO.Outputs[Derived Column Output].Columns[EstadoProducto]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[EstadoProducto]}</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\Cargar la tabla de productos\Union All.Inputs[Union All Input 2]"
+                  hasSideEffects="true"
+                  name="Union All Input 2">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Cargar la tabla de productos\Union All.Inputs[Union All Input 2].Columns[ProductID]"
+                      cachedDataType="i4"
+                      cachedName="ProductID"
+                      lineageId="Package\Cargar la tabla de productos\Lectura de la tabla de Productos.Outputs[OLE DB Source Output].Columns[ProductID]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[ProductID]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Cargar la tabla de productos\Union All.Inputs[Union All Input 2].Columns[ProductNameOriginal]"
+                      cachedDataType="wstr"
+                      cachedLength="40"
+                      cachedName="ProductNameOriginal"
+                      lineageId="Package\Cargar la tabla de productos\Lectura de la tabla de Productos.Outputs[OLE DB Source Output].Columns[ProductNameOriginal]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[ProductNameOriginal]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Cargar la tabla de productos\Union All.Inputs[Union All Input 2].Columns[SupplierID]"
+                      cachedDataType="i4"
+                      cachedName="SupplierID"
+                      lineageId="Package\Cargar la tabla de productos\Lectura de la tabla de Productos.Outputs[OLE DB Source Output].Columns[SupplierID]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[SupplierID]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Cargar la tabla de productos\Union All.Inputs[Union All Input 2].Columns[CategoryID]"
+                      cachedDataType="i4"
+                      cachedName="CategoryID"
+                      lineageId="Package\Cargar la tabla de productos\Lectura de la tabla de Productos.Outputs[OLE DB Source Output].Columns[CategoryID]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[CategoryID]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Cargar la tabla de productos\Union All.Inputs[Union All Input 2].Columns[QuantityPerUnit]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="QuantityPerUnit"
+                      lineageId="Package\Cargar la tabla de productos\Lectura de la tabla de Productos.Outputs[OLE DB Source Output].Columns[QuantityPerUnit]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[QuantityPerUnit]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Cargar la tabla de productos\Union All.Inputs[Union All Input 2].Columns[UnitPriceSinAumento]"
+                      cachedDataType="cy"
+                      cachedName="UnitPriceSinAumento"
+                      lineageId="Package\Cargar la tabla de productos\Lectura de la tabla de Productos.Outputs[OLE DB Source Output].Columns[UnitPriceSinAumento]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[UnitPriceSinAumento]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Cargar la tabla de productos\Union All.Inputs[Union All Input 2].Columns[UnitsInStock]"
+                      cachedDataType="i2"
+                      cachedName="UnitsInStock"
+                      lineageId="Package\Cargar la tabla de productos\Lectura de la tabla de Productos.Outputs[OLE DB Source Output].Columns[UnitsInStock]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[UnitsInStock]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Cargar la tabla de productos\Union All.Inputs[Union All Input 2].Columns[UnitsOnOrder]"
+                      cachedDataType="i2"
+                      cachedName="UnitsOnOrder"
+                      lineageId="Package\Cargar la tabla de productos\Lectura de la tabla de Productos.Outputs[OLE DB Source Output].Columns[UnitsOnOrder]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[UnitsOnOrder]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Cargar la tabla de productos\Union All.Inputs[Union All Input 2].Columns[ReorderLevel]"
+                      cachedDataType="i2"
+                      cachedName="ReorderLevel"
+                      lineageId="Package\Cargar la tabla de productos\Lectura de la tabla de Productos.Outputs[OLE DB Source Output].Columns[ReorderLevel]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[ReorderLevel]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Cargar la tabla de productos\Union All.Inputs[Union All Input 2].Columns[Discontinued]"
+                      cachedDataType="bool"
+                      cachedName="Discontinued"
+                      lineageId="Package\Cargar la tabla de productos\Lectura de la tabla de Productos.Outputs[OLE DB Source Output].Columns[Discontinued]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[Discontinued]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Cargar la tabla de productos\Union All.Inputs[Union All Input 2].Columns[ProductName]"
+                      cachedDataType="wstr"
+                      cachedLength="40"
+                      cachedName="ProductName"
+                      lineageId="Package\Cargar la tabla de productos\Pase el ProductName a mayúscula.Outputs[Derived Column Output].Columns[ProductName]">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Output column lineage ID"
+                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[ProductName]}</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Cargar la tabla de productos\Union All.Inputs[Union All Input 2].Columns[EstadoProducto]"
                       cachedDataType="wstr"
                       cachedLength="13"
                       cachedName="EstadoProducto"
@@ -919,430 +1456,88 @@
                           containsID="true"
                           dataType="System.Int32"
                           description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[EstadoProducto1]}</property>
+                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[EstadoProducto]}</property>
                       </properties>
                     </inputColumn>
                   </inputColumns>
                   <externalMetadataColumns />
                 </input>
                 <input
-                  refId="Package\Cargar la tabla de productos\Union All 1.Inputs[Union All Input 3]"
-                  hasSideEffects="true"
-                  name="Union All Input 3">
-                  <inputColumns>
-                    <inputColumn
-                      refId="Package\Cargar la tabla de productos\Union All 1.Inputs[Union All Input 3].Columns[ProductID]"
-                      cachedDataType="i4"
-                      cachedName="ProductID"
-                      lineageId="Package\Cargar la tabla de productos\Lectura de la tabla de Productos.Outputs[OLE DB Source Output].Columns[ProductID]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[ProductID]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Cargar la tabla de productos\Union All 1.Inputs[Union All Input 3].Columns[ProductNameOriginal]"
-                      cachedDataType="wstr"
-                      cachedLength="40"
-                      cachedName="ProductNameOriginal"
-                      lineageId="Package\Cargar la tabla de productos\Lectura de la tabla de Productos.Outputs[OLE DB Source Output].Columns[ProductNameOriginal]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[ProductNameOriginal]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Cargar la tabla de productos\Union All 1.Inputs[Union All Input 3].Columns[SupplierID]"
-                      cachedDataType="i4"
-                      cachedName="SupplierID"
-                      lineageId="Package\Cargar la tabla de productos\Lectura de la tabla de Productos.Outputs[OLE DB Source Output].Columns[SupplierID]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[SupplierID]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Cargar la tabla de productos\Union All 1.Inputs[Union All Input 3].Columns[CategoryID]"
-                      cachedDataType="i4"
-                      cachedName="CategoryID"
-                      lineageId="Package\Cargar la tabla de productos\Lectura de la tabla de Productos.Outputs[OLE DB Source Output].Columns[CategoryID]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[CategoryID]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Cargar la tabla de productos\Union All 1.Inputs[Union All Input 3].Columns[QuantityPerUnit]"
-                      cachedDataType="wstr"
-                      cachedLength="20"
-                      cachedName="QuantityPerUnit"
-                      lineageId="Package\Cargar la tabla de productos\Lectura de la tabla de Productos.Outputs[OLE DB Source Output].Columns[QuantityPerUnit]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[QuantityPerUnit]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Cargar la tabla de productos\Union All 1.Inputs[Union All Input 3].Columns[UnitPriceSinAumento]"
-                      cachedDataType="cy"
-                      cachedName="UnitPriceSinAumento"
-                      lineageId="Package\Cargar la tabla de productos\Lectura de la tabla de Productos.Outputs[OLE DB Source Output].Columns[UnitPriceSinAumento]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[UnitPriceSinAumento]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Cargar la tabla de productos\Union All 1.Inputs[Union All Input 3].Columns[UnitsInStock]"
-                      cachedDataType="i2"
-                      cachedName="UnitsInStock"
-                      lineageId="Package\Cargar la tabla de productos\Lectura de la tabla de Productos.Outputs[OLE DB Source Output].Columns[UnitsInStock]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[UnitsInStock]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Cargar la tabla de productos\Union All 1.Inputs[Union All Input 3].Columns[UnitsOnOrder]"
-                      cachedDataType="i2"
-                      cachedName="UnitsOnOrder"
-                      lineageId="Package\Cargar la tabla de productos\Lectura de la tabla de Productos.Outputs[OLE DB Source Output].Columns[UnitsOnOrder]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[UnitsOnOrder]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Cargar la tabla de productos\Union All 1.Inputs[Union All Input 3].Columns[ReorderLevel]"
-                      cachedDataType="i2"
-                      cachedName="ReorderLevel"
-                      lineageId="Package\Cargar la tabla de productos\Lectura de la tabla de Productos.Outputs[OLE DB Source Output].Columns[ReorderLevel]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[ReorderLevel]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Cargar la tabla de productos\Union All 1.Inputs[Union All Input 3].Columns[Discontinued]"
-                      cachedDataType="bool"
-                      cachedName="Discontinued"
-                      lineageId="Package\Cargar la tabla de productos\Lectura de la tabla de Productos.Outputs[OLE DB Source Output].Columns[Discontinued]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[Discontinued]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Cargar la tabla de productos\Union All 1.Inputs[Union All Input 3].Columns[ProductName]"
-                      cachedDataType="wstr"
-                      cachedLength="40"
-                      cachedName="ProductName"
-                      lineageId="Package\Cargar la tabla de productos\Pase el ProductName a mayúscula.Outputs[Derived Column Output].Columns[ProductName]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[ProductName]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Cargar la tabla de productos\Union All 1.Inputs[Union All Input 3].Columns[EstadoProducto]"
-                      cachedDataType="wstr"
-                      cachedLength="20"
-                      cachedName="EstadoProducto"
-                      lineageId="Package\Cargar la tabla de productos\Pase el ProductName a mayúscula.Outputs[Derived Column Output].Columns[EstadoProducto]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[EstadoProducto]}</property>
-                      </properties>
-                    </inputColumn>
-                  </inputColumns>
-                  <externalMetadataColumns />
-                </input>
-                <input
-                  refId="Package\Cargar la tabla de productos\Union All 1.Inputs[Union All Input 2]"
-                  hasSideEffects="true"
-                  name="Union All Input 2">
-                  <inputColumns>
-                    <inputColumn
-                      refId="Package\Cargar la tabla de productos\Union All 1.Inputs[Union All Input 2].Columns[ProductID]"
-                      cachedDataType="i4"
-                      cachedName="ProductID"
-                      lineageId="Package\Cargar la tabla de productos\Lectura de la tabla de Productos.Outputs[OLE DB Source Output].Columns[ProductID]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[ProductID]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Cargar la tabla de productos\Union All 1.Inputs[Union All Input 2].Columns[ProductNameOriginal]"
-                      cachedDataType="wstr"
-                      cachedLength="40"
-                      cachedName="ProductNameOriginal"
-                      lineageId="Package\Cargar la tabla de productos\Lectura de la tabla de Productos.Outputs[OLE DB Source Output].Columns[ProductNameOriginal]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[ProductNameOriginal]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Cargar la tabla de productos\Union All 1.Inputs[Union All Input 2].Columns[SupplierID]"
-                      cachedDataType="i4"
-                      cachedName="SupplierID"
-                      lineageId="Package\Cargar la tabla de productos\Lectura de la tabla de Productos.Outputs[OLE DB Source Output].Columns[SupplierID]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[SupplierID]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Cargar la tabla de productos\Union All 1.Inputs[Union All Input 2].Columns[CategoryID]"
-                      cachedDataType="i4"
-                      cachedName="CategoryID"
-                      lineageId="Package\Cargar la tabla de productos\Lectura de la tabla de Productos.Outputs[OLE DB Source Output].Columns[CategoryID]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[CategoryID]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Cargar la tabla de productos\Union All 1.Inputs[Union All Input 2].Columns[QuantityPerUnit]"
-                      cachedDataType="wstr"
-                      cachedLength="20"
-                      cachedName="QuantityPerUnit"
-                      lineageId="Package\Cargar la tabla de productos\Lectura de la tabla de Productos.Outputs[OLE DB Source Output].Columns[QuantityPerUnit]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[QuantityPerUnit]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Cargar la tabla de productos\Union All 1.Inputs[Union All Input 2].Columns[UnitPriceSinAumento]"
-                      cachedDataType="cy"
-                      cachedName="UnitPriceSinAumento"
-                      lineageId="Package\Cargar la tabla de productos\Lectura de la tabla de Productos.Outputs[OLE DB Source Output].Columns[UnitPriceSinAumento]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[UnitPriceSinAumento]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Cargar la tabla de productos\Union All 1.Inputs[Union All Input 2].Columns[UnitsInStock]"
-                      cachedDataType="i2"
-                      cachedName="UnitsInStock"
-                      lineageId="Package\Cargar la tabla de productos\Lectura de la tabla de Productos.Outputs[OLE DB Source Output].Columns[UnitsInStock]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[UnitsInStock]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Cargar la tabla de productos\Union All 1.Inputs[Union All Input 2].Columns[UnitsOnOrder]"
-                      cachedDataType="i2"
-                      cachedName="UnitsOnOrder"
-                      lineageId="Package\Cargar la tabla de productos\Lectura de la tabla de Productos.Outputs[OLE DB Source Output].Columns[UnitsOnOrder]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[UnitsOnOrder]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Cargar la tabla de productos\Union All 1.Inputs[Union All Input 2].Columns[ReorderLevel]"
-                      cachedDataType="i2"
-                      cachedName="ReorderLevel"
-                      lineageId="Package\Cargar la tabla de productos\Lectura de la tabla de Productos.Outputs[OLE DB Source Output].Columns[ReorderLevel]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[ReorderLevel]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Cargar la tabla de productos\Union All 1.Inputs[Union All Input 2].Columns[Discontinued]"
-                      cachedDataType="bool"
-                      cachedName="Discontinued"
-                      lineageId="Package\Cargar la tabla de productos\Lectura de la tabla de Productos.Outputs[OLE DB Source Output].Columns[Discontinued]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[Discontinued]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Cargar la tabla de productos\Union All 1.Inputs[Union All Input 2].Columns[ProductName]"
-                      cachedDataType="wstr"
-                      cachedLength="40"
-                      cachedName="ProductName"
-                      lineageId="Package\Cargar la tabla de productos\Pase el ProductName a mayúscula.Outputs[Derived Column Output].Columns[ProductName]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[ProductName]}</property>
-                      </properties>
-                    </inputColumn>
-                    <inputColumn
-                      refId="Package\Cargar la tabla de productos\Union All 1.Inputs[Union All Input 2].Columns[EstadoProducto]"
-                      cachedDataType="wstr"
-                      cachedLength="20"
-                      cachedName="EstadoProducto"
-                      lineageId="Package\Cargar la tabla de productos\Pase el ProductName a mayúscula.Outputs[Derived Column Output].Columns[EstadoProducto]">
-                      <properties>
-                        <property
-                          containsID="true"
-                          dataType="System.Int32"
-                          description="Output column lineage ID"
-                          name="OutputColumnLineageID">#{Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[EstadoProducto]}</property>
-                      </properties>
-                    </inputColumn>
-                  </inputColumns>
-                  <externalMetadataColumns />
-                </input>
-                <input
-                  refId="Package\Cargar la tabla de productos\Union All 1.Inputs[Union All Input 4]"
+                  refId="Package\Cargar la tabla de productos\Union All.Inputs[Union All Input 3]"
                   dangling="true"
                   hasSideEffects="true"
-                  name="Union All Input 4">
+                  name="Union All Input 3">
                   <externalMetadataColumns />
                 </input>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1]"
+                  refId="Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1]"
                   name="Union All Output 1">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[ProductID]"
+                      refId="Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[ProductID]"
                       dataType="i4"
-                      lineageId="Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[ProductID]"
+                      lineageId="Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[ProductID]"
                       name="ProductID" />
                     <outputColumn
-                      refId="Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[ProductNameOriginal]"
+                      refId="Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[ProductNameOriginal]"
                       dataType="wstr"
                       length="40"
-                      lineageId="Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[ProductNameOriginal]"
+                      lineageId="Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[ProductNameOriginal]"
                       name="ProductNameOriginal" />
                     <outputColumn
-                      refId="Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[SupplierID]"
+                      refId="Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[SupplierID]"
                       dataType="i4"
-                      lineageId="Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[SupplierID]"
+                      lineageId="Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[SupplierID]"
                       name="SupplierID" />
                     <outputColumn
-                      refId="Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[CategoryID]"
+                      refId="Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[CategoryID]"
                       dataType="i4"
-                      lineageId="Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[CategoryID]"
+                      lineageId="Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[CategoryID]"
                       name="CategoryID" />
                     <outputColumn
-                      refId="Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[QuantityPerUnit]"
+                      refId="Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[QuantityPerUnit]"
                       dataType="wstr"
                       length="20"
-                      lineageId="Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[QuantityPerUnit]"
+                      lineageId="Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[QuantityPerUnit]"
                       name="QuantityPerUnit" />
                     <outputColumn
-                      refId="Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[UnitPriceSinAumento]"
+                      refId="Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[UnitPriceSinAumento]"
                       dataType="cy"
-                      lineageId="Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[UnitPriceSinAumento]"
+                      lineageId="Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[UnitPriceSinAumento]"
                       name="UnitPriceSinAumento" />
                     <outputColumn
-                      refId="Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[UnitsInStock]"
+                      refId="Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[UnitsInStock]"
                       dataType="i2"
-                      lineageId="Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[UnitsInStock]"
+                      lineageId="Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[UnitsInStock]"
                       name="UnitsInStock" />
                     <outputColumn
-                      refId="Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[UnitsOnOrder]"
+                      refId="Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[UnitsOnOrder]"
                       dataType="i2"
-                      lineageId="Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[UnitsOnOrder]"
+                      lineageId="Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[UnitsOnOrder]"
                       name="UnitsOnOrder" />
                     <outputColumn
-                      refId="Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[ReorderLevel]"
+                      refId="Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[ReorderLevel]"
                       dataType="i2"
-                      lineageId="Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[ReorderLevel]"
+                      lineageId="Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[ReorderLevel]"
                       name="ReorderLevel" />
                     <outputColumn
-                      refId="Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[Discontinued]"
+                      refId="Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[Discontinued]"
                       dataType="bool"
-                      lineageId="Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[Discontinued]"
+                      lineageId="Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[Discontinued]"
                       name="Discontinued" />
                     <outputColumn
-                      refId="Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[ProductName]"
+                      refId="Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[ProductName]"
                       dataType="wstr"
                       length="40"
-                      lineageId="Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[ProductName]"
+                      lineageId="Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[ProductName]"
                       name="ProductName" />
                     <outputColumn
-                      refId="Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[EstadoProducto]"
+                      refId="Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[EstadoProducto]"
                       dataType="wstr"
                       length="20"
-                      lineageId="Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[EstadoProducto]"
-                      name="EstadoProducto" />
-                    <outputColumn
-                      refId="Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[EstadoProducto1]"
-                      dataType="wstr"
-                      length="13"
-                      lineageId="Package\Cargar la tabla de productos\Union All 1.Outputs[Union All Output 1].Columns[EstadoProducto1]"
+                      lineageId="Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1].Columns[EstadoProducto]"
                       name="EstadoProducto" />
                   </outputColumns>
                   <externalMetadataColumns />
@@ -1358,14 +1553,14 @@
               startId="Package\Cargar la tabla de productos\Pase el ProductName a mayúscula.Outputs[Derived Column Output]" />
             <path
               refId="Package\Cargar la tabla de productos.Paths[Derived Column Output1]"
-              endId="Package\Cargar la tabla de productos\Union All 1.Inputs[Union All Input 1]"
-              name="Derived Column Output"
-              startId="Package\Cargar la tabla de productos\Agregar el sufijo DESCONTINUADO.Outputs[Derived Column Output]" />
-            <path
-              refId="Package\Cargar la tabla de productos.Paths[Derived Column Output2]"
-              endId="Package\Cargar la tabla de productos\Union All 1.Inputs[Union All Input 3]"
+              endId="Package\Cargar la tabla de productos\Union All.Inputs[Union All Input 4]"
               name="Derived Column Output"
               startId="Package\Cargar la tabla de productos\Agregar sufijo DESABASTECIDO.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Cargar la tabla de productos.Paths[Derived Column Output2]"
+              endId="Package\Cargar la tabla de productos\Union All.Inputs[Union All Input 2]"
+              name="Derived Column Output"
+              startId="Package\Cargar la tabla de productos\Agregar el sufijo DESCONTINUADO.Outputs[Derived Column Output]" />
             <path
               refId="Package\Cargar la tabla de productos.Paths[OLE DB Source Output]"
               endId="Package\Cargar la tabla de productos\Pase el ProductName a mayúscula.Inputs[Derived Column Input]"
@@ -1388,9 +1583,14 @@
               startId="Package\Cargar la tabla de productos\Conditional Split.Outputs[Producto Descontinuado]" />
             <path
               refId="Package\Cargar la tabla de productos.Paths[Row Count Output 1]"
-              endId="Package\Cargar la tabla de productos\Union All 1.Inputs[Union All Input 2]"
+              endId="Package\Cargar la tabla de productos\Union All.Inputs[Union All Input 1]"
               name="Row Count Output 1"
               startId="Package\Cargar la tabla de productos\Row Count.Outputs[Row Count Output 1]" />
+            <path
+              refId="Package\Cargar la tabla de productos.Paths[Union All Output 1]"
+              endId="Package\Cargar la tabla de productos\SQL Server Destination.Inputs[SQL Server Destination Input]"
+              name="Union All Output 1"
+              startId="Package\Cargar la tabla de productos\Union All.Outputs[Union All Output 1]" />
           </paths>
         </pipeline>
       </DTS:ObjectData>
@@ -1426,7 +1626,7 @@
     design-time-name="Package\Cargar la tabla de productos">
     <LayoutInfo>
       <GraphLayout
-        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="250,42"
           Id="Package\Cargar la tabla de productos\Pase el ProductName a mayúscula"
@@ -1440,10 +1640,6 @@
           Id="Package\Cargar la tabla de productos\Agregar sufijo DESABASTECIDO"
           TopLeft="516,370" />
         <NodeLayout
-          Size="132,42"
-          Id="Package\Cargar la tabla de productos\Union All 1"
-          TopLeft="551,473" />
-        <NodeLayout
           Size="237,42"
           Id="Package\Cargar la tabla de productos\Lectura de la tabla de Productos"
           TopLeft="415,75" />
@@ -1455,40 +1651,6 @@
           Size="258,42"
           Id="Package\Cargar la tabla de productos\Agregar el sufijo DESCONTINUADO"
           TopLeft="215,370" />
-        <EdgeLayout
-          Id="Package\Cargar la tabla de productos.Paths[Derived Column Output1]"
-          TopLeft="344,412">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="242,61"
-              Start="0,0"
-              End="242,53.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,35.8613861386139" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,35.8613861386139"
-                    Point2="0,39.8613861386139"
-                    Point3="4,39.8613861386139" />
-                  <mssgle:LineSegment
-                    End="238,39.8613861386139" />
-                  <mssgle:CubicBezierSegment
-                    Point1="238,39.8613861386139"
-                    Point2="242,39.8613861386139"
-                    Point3="242,43.8613861386139" />
-                  <mssgle:LineSegment
-                    End="242,53.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
         <EdgeLayout
           Id="Package\Cargar la tabla de productos.Paths[Derived Column Output]"
           TopLeft="574,219">
@@ -1665,32 +1827,36 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
+        <NodeLayout
+          Size="123,42"
+          Id="Package\Cargar la tabla de productos\Union All"
+          TopLeft="602,493" />
         <EdgeLayout
-          Id="Package\Cargar la tabla de productos.Paths[Derived Column Output2]"
-          TopLeft="637.5,412">
+          Id="Package\Cargar la tabla de productos.Paths[Row Count Output 1]"
+          TopLeft="932.5,399">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-20.5,61"
+              EndConnector="-249.833333333333,94"
               Start="0,0"
-              End="-20.5,53.5">
+              End="-249.833333333333,86.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,26.5" />
+                    End="0,51.6757624398074" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,26.5"
-                    Point2="0,30.5"
-                    Point3="-4,30.5" />
+                    Point1="0,51.6757624398074"
+                    Point2="0,55.6757624398074"
+                    Point3="-4,55.6757624398074" />
                   <mssgle:LineSegment
-                    End="-16.5,30.5" />
+                    End="-245.833333333333,55.6757624398074" />
                   <mssgle:CubicBezierSegment
-                    Point1="-16.5,30.5"
-                    Point2="-20.5,30.5"
-                    Point3="-20.5,34.5" />
+                    Point1="-245.833333333333,55.6757624398074"
+                    Point2="-249.833333333333,55.6757624398074"
+                    Point3="-249.833333333333,59.6757624398074" />
                   <mssgle:LineSegment
-                    End="-20.5,53.5" />
+                    End="-249.833333333333,86.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1700,31 +1866,91 @@
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Cargar la tabla de productos.Paths[Row Count Output 1]"
-          TopLeft="932.5,399">
+          Id="Package\Cargar la tabla de productos.Paths[Derived Column Output1]"
+          TopLeft="640.916666666667,412">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="-284.5,74"
+              EndConnector="0,81"
               Start="0,0"
-              End="-284.5,66.5">
+              End="0,73.5">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,44.3564356435644" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,44.3564356435644"
-                    Point2="0,48.3564356435644"
-                    Point3="-4,48.3564356435644" />
+                    End="0,73.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Cargar la tabla de productos.Paths[Derived Column Output2]"
+          TopLeft="344,412">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="290.75,81"
+              Start="0,0"
+              End="290.75,73.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
                   <mssgle:LineSegment
-                    End="-280.5,48.3564356435644" />
+                    End="0,48.8541114058355" />
                   <mssgle:CubicBezierSegment
-                    Point1="-280.5,48.3564356435644"
-                    Point2="-284.5,48.3564356435644"
-                    Point3="-284.5,52.3564356435644" />
+                    Point1="0,48.8541114058355"
+                    Point2="0,52.8541114058355"
+                    Point3="4,52.8541114058355" />
                   <mssgle:LineSegment
-                    End="-284.5,66.5" />
+                    End="286.75,52.8541114058355" />
+                  <mssgle:CubicBezierSegment
+                    Point1="286.75,52.8541114058355"
+                    Point2="290.75,52.8541114058355"
+                    Point3="290.75,56.8541114058355" />
+                  <mssgle:LineSegment
+                    End="290.75,73.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="194,42"
+          Id="Package\Cargar la tabla de productos\SQL Server Destination"
+          TopLeft="545,578" />
+        <EdgeLayout
+          Id="Package\Cargar la tabla de productos.Paths[Union All Output 1]"
+          TopLeft="663.5,535">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-21.5,43"
+              Start="0,0"
+              End="-21.5,35.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17.5"
+                    Point2="0,21.5"
+                    Point3="-4,21.5" />
+                  <mssgle:LineSegment
+                    End="-17.5,21.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-17.5,21.5"
+                    Point2="-21.5,21.5"
+                    Point3="-21.5,25.5" />
+                  <mssgle:LineSegment
+                    End="-21.5,35.5" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -1746,6 +1972,14 @@
         <Name>TableInfoObjectType</Name>
         <Value
           type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Cargar la tabla de productos\SQL Server Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
