@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package2"
   DTS:PackageType="5"
-  DTS:VersionBuild="7"
-  DTS:VersionGUID="{2714CB0D-C8B5-4F1C-8676-49B22278FBB4}">
+  DTS:VersionBuild="12"
+  DTS:VersionGUID="{E5EB5B7D-304C-4A79-BB72-3F3987705260}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -45,6 +45,15 @@
       DTS:ObjectName="CantidadArticulos">
       <DTS:VariableValue
         DTS:DataType="5">1.</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{7A09AF26-0D5C-4E02-BACD-3525837EA441}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="IdArticulo">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
@@ -81,7 +90,7 @@
       DTS:Namespace="User"
       DTS:ObjectName="PrecioArticulo">
       <DTS:VariableValue
-        DTS:DataType="5">0.</DTS:VariableValue>
+        DTS:DataType="14">0</DTS:VariableValue>
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
@@ -129,6 +138,21 @@
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
+      DTS:refId="Package\Data Flow Task"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{FC88B517-C358-43A4-9097-F31E4029A5B1}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
       DTS:refId="Package\Execute SQL Task"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
@@ -160,21 +184,6 @@
             SQLTask:DataType="5"
             SQLTask:ParameterSize="-1" />
         </SQLTask:SqlTaskData>
-      </DTS:ObjectData>
-    </DTS:Executable>
-    <DTS:Executable
-      DTS:refId="Package\Pausa"
-      DTS:CreationName="Microsoft.Pipeline"
-      DTS:Description="Data Flow Task"
-      DTS:DTSID="{A644BB27-89E6-4389-A2E2-19687A2AB5B5}"
-      DTS:ExecutableType="Microsoft.Pipeline"
-      DTS:LocaleID="-1"
-      DTS:ObjectName="Pausa"
-      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
-      <DTS:Variables />
-      <DTS:ObjectData>
-        <pipeline
-          version="1" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -243,10 +252,22 @@
       <DTS:ForEachVariableMappings>
         <DTS:ForEachVariableMapping
           DTS:CreationName=""
-          DTS:DTSID="{4DCE701B-5102-4ED4-A55B-22956F9A0BC0}"
-          DTS:ObjectName="{4DCE701B-5102-4ED4-A55B-22956F9A0BC0}"
+          DTS:DTSID="{2CB6393C-BE0B-4A7A-B0FA-CE3ABC4DD325}"
+          DTS:ObjectName="{2CB6393C-BE0B-4A7A-B0FA-CE3ABC4DD325}"
           DTS:ValueIndex="0"
           DTS:VariableName="User::NombreArticulo" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{2343C03A-0B14-4BBA-8CE1-33066F2FC3A7}"
+          DTS:ObjectName="{2343C03A-0B14-4BBA-8CE1-33066F2FC3A7}"
+          DTS:ValueIndex="1"
+          DTS:VariableName="User::IdArticulo" />
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{D0524934-40DC-404E-8EE9-03DF0D5BCE02}"
+          DTS:ObjectName="{D0524934-40DC-404E-8EE9-03DF0D5BCE02}"
+          DTS:ValueIndex="2"
+          DTS:VariableName="User::PrecioArticulo" />
       </DTS:ForEachVariableMappings>
     </DTS:Executable>
   </DTS:Executables>
@@ -254,8 +275,8 @@
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint]"
       DTS:CreationName=""
-      DTS:DTSID="{7A5CB95B-F10A-49A5-9F94-0A8B800DD1C5}"
-      DTS:From="Package\Pausa"
+      DTS:DTSID="{A14E3E9F-6A56-4902-8647-B0E5F9FDECDA}"
+      DTS:From="Package\Execute SQL Task"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint"
       DTS:To="Package\Procese los productos" />
@@ -268,13 +289,13 @@
       DTS:ObjectName="Constraint 1"
       DTS:To="Package\Calcular el promedio" />
     <DTS:PrecedenceConstraint
-      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
       DTS:CreationName=""
-      DTS:DTSID="{97D23EFB-7E44-4809-B7EC-B78A1C89B770}"
-      DTS:From="Package\Execute SQL Task"
+      DTS:DTSID="{B8A87EBD-D60E-49D9-8275-5F6835D01C62}"
+      DTS:From="Package\Calcular el promedio"
       DTS:LogicalAnd="True"
-      DTS:ObjectName="Constraint 2"
-      DTS:To="Package\Pausa" />
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Data Flow Task" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -296,10 +317,6 @@
           Size="170,42"
           Id="Package\Execute SQL Task"
           TopLeft="328,112" />
-        <NodeLayout
-          Size="110,42"
-          Id="Package\Pausa"
-          TopLeft="686,128" />
         <NodeLayout
           Size="260,42"
           Id="Package\Procese los productos\Incrementar el acumulado de precios"
@@ -350,40 +367,6 @@
           Id="Package\Procese los productos"
           TopLeft="475,218" />
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="741,170">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-61.5,48"
-              Start="0,0"
-              End="-61.5,40.5">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,20" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,20"
-                    Point2="0,24"
-                    Point3="-4,24" />
-                  <mssgle:LineSegment
-                    End="-57.5,24" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-57.5,24"
-                    Point2="-61.5,24"
-                    Point3="-61.5,28" />
-                  <mssgle:LineSegment
-                    End="-61.5,40.5" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
           TopLeft="679.5,456">
           <EdgeLayout.Curve>
@@ -417,40 +400,6 @@
             <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="498,133">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="188,16"
-              Start="0,0"
-              End="180.5,16">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="90,0" />
-                  <mssgle:CubicBezierSegment
-                    Point1="90,0"
-                    Point2="94,0"
-                    Point3="94,4" />
-                  <mssgle:LineSegment
-                    End="94,12" />
-                  <mssgle:CubicBezierSegment
-                    Point1="94,12"
-                    Point2="94,16"
-                    Point3="98,16" />
-                  <mssgle:LineSegment
-                    End="180.5,16" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
         <AnnotationLayout
           Text="Este paquete se encarga de leer todos los registros de un rango de precios determinado y obtener el promedio de sus precios "
           ParentId="Package"
@@ -465,6 +414,78 @@
           Size="267,40"
           Id="541e37f7-dc38-43f9-ae00-d3f58f190efb"
           TopLeft="214,39" />
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Data Flow Task"
+          TopLeft="431,559" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="691,531">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-182.5,28"
+              Start="0,0"
+              End="-182.5,20.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,10" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,10"
+                    Point2="0,14"
+                    Point3="-4,14" />
+                  <mssgle:LineSegment
+                    End="-178.5,14" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-178.5,14"
+                    Point2="-182.5,14"
+                    Point3="-182.5,18" />
+                  <mssgle:LineSegment
+                    End="-182.5,20.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="413,154">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="266.5,64"
+              Start="0,0"
+              End="266.5,56.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,28"
+                    Point2="0,32"
+                    Point3="4,32" />
+                  <mssgle:LineSegment
+                    End="262.5,32" />
+                  <mssgle:CubicBezierSegment
+                    Point1="262.5,32"
+                    Point2="266.5,32"
+                    Point3="266.5,36" />
+                  <mssgle:LineSegment
+                    End="266.5,56.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </Package>
