@@ -1,0 +1,92 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/28/2021 7:37:21 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DEVELOPMENT"
+  DTS:CreatorName="DEVELOPMENT\analisisdatosinc"
+  DTS:DTSID="{8137BB36-C819-4687-B088-EEEEE8991C26}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.157"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package3"
+  DTS:PackageType="5"
+  DTS:VersionBuild="1"
+  DTS:VersionGUID="{3AC0366A-FD42-46B4-851A-8B4A860BDA3E}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DatosPro]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{0D7E1D12-FA89-47C2-9A5F-B883A0102482}"
+      DTS:ObjectName="DatosPro">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="2"
+          DTS:ConnectionString="C:\Users\analisisdatosinc\Desktop\DatosPro" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[FTP Connection Manager]"
+      DTS:CreationName="FTP"
+      DTS:DTSID="{A24F685F-6AC3-4289-B9BD-86BF8D6E8A60}"
+      DTS:ObjectName="FTP Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="10.128.0.2:21">
+          <DTS:FtpConnection
+            DTS:ServerName="10.128.0.2"
+            DTS:ServerUserName="analisisdatosinc">
+            <DTS:Property
+              DTS:Name="ServerPassword"
+              Sensitive="1"
+              Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAivHlcKICMEOMKDfsjhUCZwAAAAAIAAAARABUAFMAAAAQZgAAAAEAACAAAACplrI1FvvQ8P6GZr4Hu8vfpKiuY+BmdG4QLlHeHhFjBAAAAAAOgAAAAAIAACAAAADqRCfFWdPIdBulzgYZZqYTPRxlKXIRSu8rzlVcErvlzSAAAABbu7Bt2kNnt13D4RRR6/UkNcbipKvoT2yzBRNYKo5NWkAAAABu+AGw8mZosi91aqOcp3bF3x3cZ0mZV6JVszMW/Hshzf4Sr7SnJQTAZqaw8/exZn4VhTrUpofFB/Sob8cwaZX8</DTS:Property>
+          </DTS:FtpConnection>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\FTP Task"
+      DTS:CreationName="Microsoft.FtpTask"
+      DTS:Description="FTP Task"
+      DTS:DTSID="{223A1211-BB5B-46B2-90B5-DEF67CA5AE87}"
+      DTS:ExecutableType="Microsoft.FtpTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="FTP Task"
+      DTS:TaskContact="FTP Task; Microsoft Corporation; SQL Server 2019; (c) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <FtpData
+          ConnectionName="{A24F685F-6AC3-4289-B9BD-86BF8D6E8A60}"
+          TaskOperationType="Receive"
+          TaskLocalPath="DatosPro"
+          TaskRemotePath="/Documentos/Archivos.tar" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="127,42"
+          Id="Package\FTP Task"
+          TopLeft="290,102" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
